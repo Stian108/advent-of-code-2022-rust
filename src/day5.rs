@@ -1,3 +1,5 @@
+use crate::util::*;
+
 use itertools::Itertools;
 use parse_display::FromStr;
 
@@ -29,15 +31,7 @@ pub fn parse_input(input: &str) -> Input {
             }
         }
     }
-    (
-        stacks,
-        parts
-            .next()
-            .unwrap()
-            .lines()
-            .map(|line| line.parse().unwrap())
-            .collect(),
-    )
+    (stacks, parse_lines(parts.next().unwrap()))
 }
 
 pub fn part1((stacks, moves): &Input) -> String {

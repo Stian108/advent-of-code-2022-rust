@@ -1,5 +1,6 @@
 use itertools::Itertools;
 use std::collections::HashSet;
+
 type Input = Vec<(HashSet<char>, HashSet<char>)>;
 
 pub fn parse_input(input: &str) -> Input {

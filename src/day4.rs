@@ -1,4 +1,7 @@
+use crate::util::*;
+
 use parse_display::FromStr;
+
 type Input = Vec<Assignment>;
 
 #[derive(FromStr)]
@@ -11,7 +14,7 @@ pub struct Assignment {
 }
 
 pub fn parse_input(input: &str) -> Input {
-    input.lines().map(|line| line.parse().unwrap()).collect()
+    parse_lines(input)
 }
 
 pub fn part1(inp: &Input) -> usize {

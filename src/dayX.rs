@@ -1,7 +1,9 @@
+use crate::util::*;
+
 type Input = Vec<isize>;
 
 pub fn parse_input(input: &str) -> Input {
-    input.lines().map(|line| line.parse().unwrap()).collect()
+    parse_lines(input)
 }
 
 pub fn part1(inp: &Input) -> isize {

@@ -1,3 +1,5 @@
+use crate::util::*;
+
 use itertools::Itertools;
 
 type Input = Vec<Vec<isize>>;
@@ -5,7 +7,7 @@ type Input = Vec<Vec<isize>>;
 pub fn parse_input(input: &str) -> Input {
     input
         .split("\n\n")
-        .map(|group| group.lines().map(|line| line.parse().unwrap()).collect())
+        .map(|group| parse_lines(group))
         .collect()
 }
 
