@@ -23,8 +23,7 @@ pub fn parse_input(input: &str) -> Input {
         .unwrap();
     let mut stacks: Vec<Vec<char>> = vec![vec![]; piles];
     for line in stack_iter {
-        for (i, mut chunk) in line.chars().chunks(4).into_iter().enumerate() {
-            let c = chunk.nth(1).unwrap();
+        for (i, c) in line.chars().skip(1).step_by(4).enumerate() {
             if !c.is_whitespace() {
                 stacks[i].push(c);
             }
