@@ -1,4 +1,4 @@
-use crate::util::*;
+use crate::*;
 
 type Input = Vec<isize>;
 

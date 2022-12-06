@@ -9,4 +9,5 @@ aoc_main::main! {
     day3  : parse_input => part1, part2;
     day4  : parse_input => part1, part2;
     day5  : parse_input => part1, part2;
+    day6                => part1, part2;
 }
