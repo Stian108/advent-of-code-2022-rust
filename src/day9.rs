@@ -70,28 +70,8 @@ fn update_tail(tail: &Point, head: &Point) -> Point {
         return *tail;
     }
     let mut tail = *tail;
-    if tail.x != head.x && tail.y != head.y {
-        if head.x - tail.x > 0 {
-            tail.x += 1;
-        } else if head.x - tail.x < 0 {
-            tail.x -= 1;
-        }
-        if head.y - tail.y > 0 {
-            tail.y += 1
-        } else if head.y - tail.y < 0 {
-            tail.y -= 1
-        }
-    } else {
-        if head.x - tail.x == 2 {
-            tail.x += 1;
-        } else if head.y - tail.y == 2 {
-            tail.y += 1
-        } else if head.x - tail.x == -2 {
-            tail.x -= 1;
-        } else if head.y - tail.y == -2 {
-            tail.y -= 1
-        }
-    }
+    tail.x += (head.x - tail.x).signum();
+    tail.y += (head.y - tail.y).signum();
     tail
 }
 
