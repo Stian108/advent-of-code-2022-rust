@@ -9,14 +9,31 @@ pub mod day8;
 pub mod day9;
 
 pub mod day10;
+pub mod day11;
+pub mod day12;
 
 use std::{fmt::Debug, str::FromStr};
 
-pub fn parse_lines<F, B>(inp: &str) -> B
+extern crate derive_more;
+use derive_more::From;
+
+pub fn parse_lines<F: FromStr, B: FromIterator<F>>(inp: &str) -> B
 where
-    F: FromStr,
     F::Err: Debug,
-    B: FromIterator<F>,
 {
     inp.lines().map(|line| line.parse().unwrap()).collect()
+}
+
+#[derive(Debug, Clone, From)]
+pub struct VecP<T>(Vec<T>);
+
+impl<T: std::str::FromStr> FromStr for VecP<T> {
+    type Err = T::Err;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        Ok(Self(
+            s.split(',')
+                .map(|v| v.trim().parse())
+                .collect::<Result<_, Self::Err>>()?,
+        ))
+    }
 }
