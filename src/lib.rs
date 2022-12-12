@@ -21,7 +21,14 @@ pub fn parse_lines<F: FromStr, B: FromIterator<F>>(inp: &str) -> B
 where
     F::Err: Debug,
 {
-    inp.lines().map(|line| line.parse().unwrap()).collect()
+    parse_split(inp, "\n")
+}
+
+pub fn parse_split<F: FromStr, B: FromIterator<F>>(inp: &str, p: &str) -> B
+where
+    F::Err: Debug,
+{
+    inp.split(p).map(|line| line.parse().unwrap()).collect()
 }
 
 #[derive(Debug, Clone, From)]

@@ -33,10 +33,7 @@ pub enum Op {
 }
 
 pub fn parse_input(input: &str) -> Input {
-    input
-        .split("\n\n")
-        .map(|line| line.parse().unwrap())
-        .collect()
+    parse_split(input, "\n\n")
 }
 
 pub fn part1(inp: &Input) -> usize {
