@@ -2,6 +2,23 @@ use crate::*;
 
 use parse_display::FromStr;
 
+extern crate derive_more;
+use derive_more::From;
+
+#[derive(Debug, Clone, From)]
+pub struct VecP<T>(Vec<T>);
+
+impl<T: std::str::FromStr> FromStr for VecP<T> {
+    type Err = T::Err;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        Ok(Self(
+            s.split(',')
+                .map(|v| v.trim().parse())
+                .collect::<Result<_, Self::Err>>()?,
+        ))
+    }
+}
+
 type Input = Vec<Monkey>;
 
 #[derive(Clone, Debug, FromStr)]

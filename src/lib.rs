@@ -12,11 +12,9 @@ pub mod day10;
 pub mod day11;
 pub mod day12;
 pub mod day13;
+pub mod day14;
 
 use std::{fmt::Debug, str::FromStr};
-
-extern crate derive_more;
-use derive_more::From;
 
 pub fn parse_lines<F: FromStr, B: FromIterator<F>>(inp: &str) -> B
 where
@@ -30,18 +28,4 @@ where
     F::Err: Debug,
 {
     inp.split(p).map(|line| line.parse().unwrap()).collect()
-}
-
-#[derive(Debug, Clone, From)]
-pub struct VecP<T>(Vec<T>);
-
-impl<T: std::str::FromStr> FromStr for VecP<T> {
-    type Err = T::Err;
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        Ok(Self(
-            s.split(',')
-                .map(|v| v.trim().parse())
-                .collect::<Result<_, Self::Err>>()?,
-        ))
-    }
 }
