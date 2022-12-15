@@ -31,7 +31,10 @@ pub fn parse_input(input: &str) -> Input {
             }
         }
     }
-    (stacks, parse_lines(parts.next().unwrap()))
+    (
+        stacks,
+        parts.next().unwrap().parse::<VecP<_, "\n">>().unwrap().0,
+    )
 }
 
 pub fn part1((stacks, moves): &Input) -> String {

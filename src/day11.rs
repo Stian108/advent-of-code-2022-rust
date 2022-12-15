@@ -2,24 +2,7 @@ use crate::*;
 
 use parse_display::FromStr;
 
-extern crate derive_more;
-use derive_more::From;
-
-#[derive(Debug, Clone, From)]
-pub struct VecP<T>(Vec<T>);
-
-impl<T: std::str::FromStr> FromStr for VecP<T> {
-    type Err = T::Err;
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        Ok(Self(
-            s.split(',')
-                .map(|v| v.trim().parse())
-                .collect::<Result<_, Self::Err>>()?,
-        ))
-    }
-}
-
-type Input = Vec<Monkey>;
+type Input = VecP<Monkey, "\n\n">;
 
 #[derive(Clone, Debug, FromStr)]
 #[display(
@@ -32,7 +15,7 @@ type Input = Vec<Monkey>;
 )]
 pub struct Monkey {
     _id: usize,
-    items: VecP<usize>,
+    items: VecP<usize, ",">,
     operation: Op,
     divisible_by: usize,
     if_true: usize,
@@ -50,14 +33,14 @@ pub enum Op {
 }
 
 pub fn parse_input(input: &str) -> Input {
-    parse_split(input, "\n\n")
+    input.parse().unwrap()
 }
 
 pub fn part1(inp: &Input) -> usize {
-    let mut monkeys = inp.clone();
-    let mut inspected: Vec<usize> = vec![0; inp.len()];
+    let mut monkeys = inp.0.clone();
+    let mut inspected: Vec<usize> = vec![0; monkeys.len()];
     for _ in 0..20 {
-        for i in 0..inp.len() {
+        for i in 0..monkeys.len() {
             let current = monkeys[i].items.0.clone();
             for item in current.iter() {
                 inspected[i] += 1;
@@ -82,11 +65,11 @@ pub fn part1(inp: &Input) -> usize {
 }
 
 pub fn part2(inp: &Input) -> usize {
-    let mut monkeys = inp.clone();
-    let mut inspected: Vec<usize> = vec![0; inp.len()];
+    let mut monkeys = inp.0.clone();
+    let mut inspected: Vec<usize> = vec![0; monkeys.len()];
     let modulo: usize = monkeys.iter().map(|monkey| monkey.divisible_by).product();
     for _ in 0..10000 {
-        for i in 0..inp.len() {
+        for i in 0..monkeys.len() {
             let current = monkeys[i].items.0.clone();
             for item in current.iter() {
                 inspected[i] += 1;

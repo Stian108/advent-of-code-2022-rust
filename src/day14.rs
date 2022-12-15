@@ -4,23 +4,6 @@ use itertools::Itertools;
 use parse_display::FromStr;
 use std::collections::HashSet;
 
-extern crate derive_more;
-use derive_more::From;
-
-#[derive(Debug, Clone, From)]
-pub struct VecP<T>(Vec<T>);
-
-impl<T: std::str::FromStr> FromStr for VecP<T> {
-    type Err = T::Err;
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        Ok(Self(
-            s.split("->")
-                .map(|v| v.trim().parse())
-                .collect::<Result<_, Self::Err>>()?,
-        ))
-    }
-}
-
 #[derive(Debug, FromStr, Hash, Clone, Copy, Eq, PartialEq)]
 #[display("{0},{1}")]
 pub struct Point(usize, usize);
@@ -28,7 +11,7 @@ pub struct Point(usize, usize);
 type Input = HashSet<Point>;
 
 pub fn parse_input(input: &str) -> Input {
-    let lines = parse_lines::<VecP<Point>, Vec<_>>(input);
+    let lines = input.parse::<VecP<VecP<Point, "->">, "\n">>().unwrap().0;
     let mut points = HashSet::new();
     for path in lines.iter() {
         for (p0, p1) in path.0.iter().tuple_windows() {

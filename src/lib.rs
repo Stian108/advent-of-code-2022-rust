@@ -1,3 +1,6 @@
+#![allow(incomplete_features)]
+#![feature(adt_const_params)]
+
 pub mod day1;
 pub mod day2;
 pub mod day3;
@@ -17,16 +20,19 @@ pub mod day15;
 
 use std::{fmt::Debug, str::FromStr};
 
-pub fn parse_lines<F: FromStr, B: FromIterator<F>>(inp: &str) -> B
-where
-    F::Err: Debug,
-{
-    parse_split(inp, "\n")
-}
+extern crate derive_more;
+use derive_more::From;
 
-pub fn parse_split<F: FromStr, B: FromIterator<F>>(inp: &str, p: &str) -> B
-where
-    F::Err: Debug,
-{
-    inp.split(p).map(|line| line.parse().unwrap()).collect()
+#[derive(Debug, Clone, From)]
+pub struct VecP<T, const P: &'static str>(Vec<T>);
+
+impl<T: std::str::FromStr, const P: &'static str> FromStr for VecP<T, P> {
+    type Err = T::Err;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        Ok(Self(
+            s.split(P)
+                .map(|v| v.trim().parse())
+                .collect::<Result<_, Self::Err>>()?,
+        ))
+    }
 }

@@ -30,7 +30,7 @@ pub struct TreeNode {
 }
 
 pub fn parse_input(input: &str) -> Input {
-    let inp = parse_lines::<Inp, Vec<_>>(input);
+    let inp = input.parse::<VecP<Inp, "\n">>().unwrap().0;
     let root = Rc::new(RefCell::new(TreeNode {
         value: None,
         children: HashMap::new(),

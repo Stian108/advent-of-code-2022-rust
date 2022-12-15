@@ -2,25 +2,24 @@ use crate::*;
 
 use itertools::Itertools;
 
-type Input = Vec<Vec<isize>>;
+type Input = VecP<VecP<isize, "\n">, "\n\n">;
 
 pub fn parse_input(input: &str) -> Input {
-    input
-        .split("\n\n")
-        .map(|group| parse_lines(group))
-        .collect()
+    input.parse().unwrap()
 }
 
 pub fn part1(inp: &Input) -> isize {
-    inp.into_iter()
-        .map(|group| group.into_iter().sum())
+    inp.0
+        .iter()
+        .map(|group| group.0.iter().sum())
         .max()
         .unwrap()
 }
 
 pub fn part2(inp: &Input) -> isize {
-    inp.into_iter()
-        .map(|group| group.into_iter().sum::<isize>())
+    inp.0
+        .iter()
+        .map(|group| group.0.iter().sum::<isize>())
         .sorted()
         .rev()
         .take(3)

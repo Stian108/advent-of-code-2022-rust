@@ -4,7 +4,7 @@ use parse_display::FromStr;
 
 use crate::*;
 
-type Input = Vec<Sensor>;
+type Input = VecP<Sensor, "\n">;
 
 #[derive(Debug, FromStr, PartialEq, Eq, Hash, Clone, Copy)]
 #[display("x={0}, y={1}")]
@@ -18,7 +18,7 @@ pub struct Sensor {
 }
 
 pub fn parse_input(input: &str) -> Input {
-    parse_lines(input)
+    input.parse().unwrap()
 }
 
 pub fn part1(inp: &Input) -> isize {
@@ -28,7 +28,7 @@ pub fn part1(inp: &Input) -> isize {
 pub fn part1_base(inp: &Input, y: isize) -> isize {
     let mut ranges: Vec<(isize, isize)> = vec![];
     let mut beacons: HashSet<isize> = HashSet::new();
-    for Sensor { location, beacon } in inp.iter() {
+    for Sensor { location, beacon } in inp.0.iter() {
         if beacon.1 == y {
             beacons.insert(beacon.0);
         }
@@ -69,7 +69,7 @@ pub fn part2_base(inp: &Input, max: isize) -> isize {
     for y in 0..=max {
         let mut ranges: Vec<(isize, isize)> = vec![];
         let mut beacons: HashSet<isize> = HashSet::new();
-        for Sensor { location, beacon } in inp.iter() {
+        for Sensor { location, beacon } in inp.0.iter() {
             if beacon.1 == y {
                 beacons.insert(beacon.0);
             }

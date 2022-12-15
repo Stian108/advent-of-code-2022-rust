@@ -2,7 +2,7 @@ use crate::*;
 
 use parse_display::FromStr;
 
-type Input = Vec<Assignment>;
+type Input = VecP<Assignment, "\n">;
 
 #[derive(FromStr)]
 #[display("{start_left}-{end_left},{start_right}-{end_right}")]
@@ -14,11 +14,12 @@ pub struct Assignment {
 }
 
 pub fn parse_input(input: &str) -> Input {
-    parse_lines(input)
+    input.parse().unwrap()
 }
 
 pub fn part1(inp: &Input) -> usize {
-    inp.iter()
+    inp.0
+        .iter()
         .filter(|pair| {
             (pair.start_left >= pair.start_right && pair.end_left <= pair.end_right)
                 || (pair.start_left <= pair.start_right && pair.end_left >= pair.end_right)
@@ -27,7 +28,8 @@ pub fn part1(inp: &Input) -> usize {
 }
 
 pub fn part2(inp: &Input) -> usize {
-    inp.iter()
+    inp.0
+        .iter()
         .filter(|pair| (pair.end_left >= pair.start_right) && (pair.start_left <= pair.end_right))
         .count()
 }

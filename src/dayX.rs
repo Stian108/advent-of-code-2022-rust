@@ -1,9 +1,9 @@
 use crate::*;
 
-type Input = Vec<isize>;
+type Input = VecP<isize>;
 
 pub fn parse_input(input: &str) -> Input {
-    parse_lines(input)
+    input.parse().unwrap()
 }
 
 pub fn part1(inp: &Input) -> isize {

@@ -1,7 +1,7 @@
 use crate::*;
 use parse_display::FromStr;
 
-type Input = Vec<Round>;
+type Input = VecP<Round, "\n">;
 
 #[derive(FromStr, PartialEq, Eq)]
 pub enum RPS {
@@ -62,11 +62,12 @@ fn convert(mov: &Res) -> RPS {
 }
 
 pub fn parse_input(input: &str) -> Input {
-    parse_lines(input)
+    input.parse().unwrap()
 }
 
 pub fn part1(inp: &Input) -> isize {
-    inp.iter()
+    inp.0
+        .iter()
         .map(|Round { me, opp }| {
             let me = convert(me);
             if opp == &me {
@@ -83,7 +84,8 @@ pub fn part1(inp: &Input) -> isize {
 }
 
 pub fn part2(inp: &Input) -> isize {
-    inp.iter()
+    inp.0
+        .iter()
         .map(|Round { me, opp }| match me {
             Res::Win => 6 + points(&looses_against(opp)),
             Res::Loss => points(&wins_against(opp)),
