@@ -11,7 +11,7 @@ pub struct Point(usize, usize);
 type Input = HashSet<Point>;
 
 pub fn parse_input(input: &str) -> Input {
-    let lines = input.parse::<VecP<VecP<Point, "->">, "\n">>().unwrap().0;
+    let lines = input.parse::<VecP<VecP<Point, "->">>>().unwrap().0;
     let mut points = HashSet::new();
     for path in lines.iter() {
         for (p0, p1) in path.0.iter().tuple_windows() {

@@ -2,7 +2,7 @@ use crate::*;
 
 use itertools::Itertools;
 
-type Input = VecP<VecP<isize, "\n">, "\n\n">;
+type Input = VecP<VecP<isize>, "\n\n">;
 
 pub fn parse_input(input: &str) -> Input {
     input.parse().unwrap()

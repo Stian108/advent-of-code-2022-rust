@@ -18,7 +18,7 @@ pub struct Move {
     count: usize,
 }
 
-type Input = VecP<Move, "\n">;
+type Input = VecP<Move>;
 
 #[derive(Debug, Hash, Clone, PartialEq, Eq, Copy)]
 pub struct Point {

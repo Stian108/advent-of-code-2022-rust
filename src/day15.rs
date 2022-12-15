@@ -4,7 +4,7 @@ use parse_display::FromStr;
 
 use crate::*;
 
-type Input = VecP<Sensor, "\n">;
+type Input = VecP<Sensor>;
 
 #[derive(Debug, FromStr, PartialEq, Eq, Hash, Clone, Copy)]
 #[display("x={0}, y={1}")]

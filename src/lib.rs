@@ -24,7 +24,7 @@ extern crate derive_more;
 use derive_more::From;
 
 #[derive(Debug, Clone, From)]
-pub struct VecP<T, const P: &'static str>(Vec<T>);
+pub struct VecP<T, const P: &'static str = "\n">(Vec<T>);
 
 impl<T: std::str::FromStr, const P: &'static str> FromStr for VecP<T, P> {
     type Err = T::Err;

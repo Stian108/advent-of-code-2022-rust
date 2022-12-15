@@ -1,7 +1,7 @@
 use crate::*;
 use parse_display::FromStr;
 
-type Input = VecP<Round, "\n">;
+type Input = VecP<Round>;
 
 #[derive(FromStr, PartialEq, Eq)]
 pub enum RPS {

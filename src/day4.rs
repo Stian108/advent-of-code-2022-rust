@@ -2,7 +2,7 @@ use crate::*;
 
 use parse_display::FromStr;
 
-type Input = VecP<Assignment, "\n">;
+type Input = VecP<Assignment>;
 
 #[derive(FromStr)]
 #[display("{start_left}-{end_left},{start_right}-{end_right}")]

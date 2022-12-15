@@ -16,7 +16,7 @@ pub enum Op {
 pub fn parse_input(input: &str) -> Input {
     let mut xs: Vec<isize> = vec![1];
     let mut x: isize = 1;
-    for op in input.parse::<VecP<Op, "\n">>().unwrap().0 {
+    for op in input.parse::<VecP<Op>>().unwrap().0 {
         match op {
             Op::Noop => xs.push(x),
             Op::Addx(val) => {
