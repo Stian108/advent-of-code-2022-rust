@@ -17,6 +17,9 @@ pub mod day12;
 pub mod day13;
 pub mod day14;
 pub mod day15;
+pub mod day16;
+pub mod day17;
+pub mod day18;
 
 use std::{fmt::Debug, str::FromStr};
 
@@ -31,7 +34,14 @@ impl<T: std::str::FromStr, const P: &'static str> FromStr for VecP<T, P> {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         Ok(Self(
             s.split(P)
-                .map(|v| v.trim().parse())
+                .filter_map(|v| {
+                    let trimmed = v.trim();
+                    if trimmed.is_empty() {
+                        None
+                    } else {
+                        Some(trimmed.parse())
+                    }
+                })
                 .collect::<Result<_, Self::Err>>()?,
         ))
     }

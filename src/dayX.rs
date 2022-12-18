@@ -1,16 +1,16 @@
 use crate::*;
 
-type Input = VecP<isize>;
+type Input = VecP<usize>;
 
 pub fn parse_input(input: &str) -> Input {
     input.parse().unwrap()
 }
 
-pub fn part1(inp: &Input) -> isize {
+pub fn part1(inp: &Input) -> usize {
     0
 }
 
-pub fn part2(inp: &Input) -> isize {
+pub fn part2(inp: &Input) -> usize {
     0
 }
 
