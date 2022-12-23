@@ -5,7 +5,7 @@ authors = ["Stian <stian108@gmail.com>"]
 edition = "2021"
 
 [dependencies]
-aoc-main = "0.4.1"
+aoc-main = "0.5"
 pretty_assertions = "1.3.0"
 itertools = "0.10.5"
 parse-display = "0.6"
